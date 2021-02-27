@@ -1,6 +1,6 @@
 <?php
 //for this we'll turn on error output so we can try to see any problems on the screen
-//this will be active for any script that includes/requires this one
+// this will be active for any script that includes/requires this one
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
