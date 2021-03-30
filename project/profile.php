@@ -1,3 +1,4 @@
+
 <?php require_once(__DIR__ . "/partials/nav.php"); ?>
 <?php
 //Note: we have this up here, so our update happens before our get/fetch

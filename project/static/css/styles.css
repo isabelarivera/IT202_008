@@ -1,14 +1,16 @@
+
 /* design intentionally made horrible to see who doesn't change it*/
 body {
     font-family: system;
     font-size: 1.5em;
 }
+
 ul[class="nav"]{
     list-style-type: none;
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background-color: #6495ED;
+    background-color: #00BFFF;
 }
 
 .nav > li {
@@ -24,7 +26,7 @@ ul[class="nav"]{
 }
 
 .nav > li a:hover {
-    background-color: #39ca40;
+    background-color: #696969;
 }
 
 input, select {
