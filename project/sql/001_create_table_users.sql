@@ -10,6 +10,3 @@ CREATE TABLE IF NOT EXISTS `Users` (
 	)
 
 
-ALTER TABLE Users
-    ADD CONSTRAINT CK_Users_Code_Length CHECK (LEN(password) >= 4);
-GO
