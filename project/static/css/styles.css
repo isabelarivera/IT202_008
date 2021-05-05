@@ -1,4 +1,3 @@
-
 /* design intentionally made horrible to see who doesn't change it*/
 body {
     font-family: system;
@@ -46,7 +45,6 @@ input[type=submit] {
     padding: 14px 20px;
     margin: 8px 0;
     border: none;
-    border-radius: 14px;
     cursor: pointer;
 }
 
@@ -74,3 +72,5 @@ input:nth-of-type(5) {
     margin-left: 2px !important;
     margin-right: 2px !important;
 }
+
+
