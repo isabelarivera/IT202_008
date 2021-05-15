@@ -1,4 +1,3 @@
-
 <?php require_once(__DIR__ . "/partials/nav.php"); ?>
 <?php
 //Note: we have this up here, so our update happens before our get/fetch
@@ -11,6 +10,30 @@ if (!is_logged_in()) {
 }
 
 $db = getDB();
+//update status to public
+if (isset($_POST["makePub"])) {
+    $stmt = $db->prepare("UPDATE Users set status = :status where id = :id");
+        $r = $stmt->execute([":status" => "public", ":id" => get_user_id()]);
+        //flash("line 73 " . count($r));
+        if ($r) {
+            flash("Your profile is public");
+        }
+        else {
+            flash("Error updating profile");
+        }
+}
+//update status to private
+if (isset($_POST["makePriv"])) {
+    $stmt = $db->prepare("UPDATE Users set status = :status where id = :id");
+        $r = $stmt->execute([":status" => "private", ":id" => get_user_id()]);
+        //flash("line 73 " . count($r));
+        if ($r) {
+            flash("Your profile is private");
+        }
+        else {
+            flash("Error updating profile");
+        }
+}
 //save data if we submitted the form
 if (isset($_POST["saved"])) {
     $isValid = true;
@@ -111,7 +134,16 @@ if (isset($_POST["saved"])) {
 ?>
 
     <form method="POST">
-        <label for="email">Email</label>
+      <body>
+        <form method="POST">
+            <table style="width:100%">
+            <div id="currStatus"></div>
+            <tr>
+        <td>  <input class="btn btn-primary" type="submit" name="makePub" value="Set your profile to Public"/>  </td>
+        <td>  <input class="btn btn-primary" type="submit" name="makePriv" value="Set your profile to Private"/>  </td>
+            </tr>
+            </table>
+    <label for="email">Email</label>
         <input type="email" name="email" value="<?php safer_echo(get_email()); ?>"/>
         <label for="username">Username</label>
         <input type="text" maxlength="60" name="username" value="<?php safer_echo(get_username()); ?>"/>
@@ -122,4 +154,53 @@ if (isset($_POST["saved"])) {
         <input type="password" name="confirm"/>
         <input type="submit" name="saved" value="Save Profile"/>
     </form>
+
+
+<a href = "scorehistory.php"><button type="button"> Previous scores </button></a>
+
+<!-- this is for the top thingy -->
+    <form action="top.php" method ="get">
+    <label for="score">Choose the top score: </label>
+    <input list ="scores" name = "score" id ="score">
+    <datalist id = "scores">
+        <option value= "Top weekly">
+        <option value="Top monthly">
+        <option value ="Top Lifetime">
+    </datalist>
+    <input type = "submit">
+    </form> 
+
+<div class="container-fluid">
+        <h3>Your Last 10 Scores</h3>
+        <div class="list-group">
+            <?php if (isset($results) && count($results)): ?>
+                <?php foreach ($results as $r): ?>
+                    <div class="list-group-item" style="background-color: #25E418">
+                        <div class="row">
+				
+                            <div class="col">
+                                You scored: 
+                                <?php safer_echo($r["score"]); ?>
+                            </div>
+                            <div class="col">
+                                Scored on: 
+                                <?php safer_echo($r["created"]); ?>
+                            </div>
+			    <div class="col">
+                                <form method="POST">
+				</form>
+                            </div>
+                             
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            <?php else: ?>
+                <div class="list-group-item">
+                    No scores to show, sorry.
+                </div>
+            <?php endif; ?>
+        </div>
+    </div>
+
+
 <?php require(__DIR__ . "/partials/flash.php");

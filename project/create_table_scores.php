@@ -7,36 +7,30 @@ if (!has_role("Admin")) {
 }
 ?>
 
-<form method="POST">
+ <form method="POST"> 
 
-    <label>Score</label>
-    <input type = "number" min = "0" name = "score" />
-    <input type="submit" name="save" value="Create"/>
-
+	<label>scores</label>
+	<input type="number" min="0" name="score"/>
+	<input type="submit" name="save" value="Create"/>
 </form>
 
 <?php
 if(isset($_POST["save"])){
-$score = $_POST["score"];
-$user = get_user_id();
-$db = getDB();
-$stmt = $db -> prepare("INSERT INTO Scores (score, user_id) VALUES(:score, :user)");
-$r = $stmt -> execute([
-    ":score" => $score,
-    ":user" => $user
-]);
-
-if($r)
-{
-    flash("created successfully with id:" . $db -> lastInsertId());
-
-}
-else{
-    $e = $stmt->errorInfo();
+	$user = get_user_id();
+	$score=$_POST["score"];
+	$db = getDB();
+	$stmt = $db->prepare("INSERT INTO scores (user_id,score) VALUES(:user,:score)");
+	$r = $stmt->execute([
+		":user"=>$user,
+		":score"=>$score,
+	]);
+	if($r){
+		flash("Created successfully with id: " . $db->lastInsertId());
+	}
+	else{
+		$e = $stmt->errorInfo();
 		flash("Error creating: " . var_export($e, true));
-}
-
-
+	}
 }
 ?>
 <?php require(__DIR__ . "/partials/flash.php");

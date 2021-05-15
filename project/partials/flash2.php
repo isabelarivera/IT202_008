@@ -2,11 +2,11 @@
 /*put this at the bottom of the page so any templates
  populate the flash variable and then display at the proper timing*/
 ?>
-<div class="container" id="flash">
-    <?php $messages = getMessages(); ?>
+<div class="container" id="flash2">
+    <?php $messages = getMessages2(); ?>
     <?php if ($messages): ?>
         <?php foreach ($messages as $msg): ?>
-            <div class="row bg-secondary justify-content-center">
+            <div class="row bg-secondary justify-content-center" style="border: 2px solid powderblue">
                 <p><?php echo $msg; ?></p>
             </div>
         <?php endforeach; ?>
@@ -21,5 +21,5 @@
         }
     }
 
-    moveMeUp(document.getElementById("flash"));
+    moveMeUp(document.getElementById("flash2"));
 </script>
