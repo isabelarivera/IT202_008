@@ -1,4 +1,4 @@
-CREATE TABLE Scores
+CREATE TABLE scores
 (
     id      int auto_increment,
     user_id int,
